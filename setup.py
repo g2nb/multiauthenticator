@@ -9,7 +9,7 @@ with open('README.md') as f:
 
 setup(
     name='multiauthenticator',
-    packages=['multiauthenticator'],
+    py_modules=['multiauthenticator'],
     version=__version__,
     long_description=long_description,
     long_description_content_type="text/markdown",
