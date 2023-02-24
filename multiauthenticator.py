@@ -60,9 +60,7 @@ class MultiAuthenticator(Authenticator):
             html.append(
                 f"""<div class="service-login">
                         <a href='{login_url}'>
-                            <object data="/hub/static/images/login-{auth_service}.png" type="image/png">
-                                <a class='btn btn-jupyter btn-lg'>Sign in with {auth_service}</a>
-                            </object>
+                            <img src="/hub/static/images/login-{auth_service}.png" alt="Sign in with {auth_service}">
                         </a>
                     </div>"""
             )
