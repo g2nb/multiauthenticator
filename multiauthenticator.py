@@ -17,12 +17,13 @@ Example of config:
 """
 from jupyterhub.auth import Authenticator
 from jupyterhub.utils import url_path_join
-from traitlets import List
+from traitlets import List, Unicode
 
 
 class MultiAuthenticator(Authenticator):
     """Authenticator that proxies to more than one authentication provider for JupyterHub"""
     authenticators = List(help="List of authenticators to proxy", config=True)
+    custom_html = Unicode(htlp="Override the authenticator login list with custom HTML", default_value="", config=True)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -51,7 +52,9 @@ class MultiAuthenticator(Authenticator):
             self._authenticators.append(authenticator)
 
     def get_custom_html(self, base_url):
-        """Generate one sign on button per configured authenticator"""
+        """Generate one sign on button per configured authenticator or return custom HTML"""
+        if self.custom_html: return self.custom_html
+
         html = []
         for auth in self._authenticators:
             if hasattr(auth, "service_name"): auth_service = getattr(auth, "service_name")
